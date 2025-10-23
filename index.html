@@ -20,11 +20,13 @@
 
         .hero { position: relative; width: 100%; height: 700px; overflow: hidden; margin-top: 80px; }
         .slides { display: flex; transition: transform 0.8s ease-in-out; width: 100%; }
-        .hero img { width: 100%; height: 100%; object-fit: cover; flex: 0 0 100%; }
-
-        /* 개별 이미지 세로 위치 (원하는 값으로 조정하세요) */
-        /* 아래 nth-child 규칙은 제거하고, 필요 시 <img style="object-position:center 25%">처럼 인라인으로 조정하세요. */
-        .hero .slides img:nth-child(3) { object-position: center; }
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center !important; /* 항상 중앙 기준으로 표시 */
+            flex: 0 0 100%;
+        }
 
         .hero button { position: absolute; top: 50%; transform: translateY(-50%); background: none; color: white; border: none; font-size: 3em; padding: 0 15px; cursor: pointer; z-index: 10; }
         .hero button:hover { color: #e07a5f; }
@@ -68,7 +70,7 @@
             let current = 0;
 
             function showSlide(index) {
-                slides.style.transform = `translateX(-${index * 100}%)`; // vw → % 로 변경
+                slides.style.transform = `translateX(-${index * 100}%)`;
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
                 current = index;
             }
@@ -104,10 +106,9 @@
 
     <div class="hero">
         <div class="slides">
-            <!-- 인라인 스타일로 개별 위치를 쉽게 조정할 수 있습니다. 값만 바꾸세요. -->
-            <img src="https://i.imgur.com/HZwbPPO.png" alt="슬라이드 1" style="object-position: center 25%;">
-            <img src="https://i.imgur.com/N2kEb5e.png" alt="슬라이드 2" style="object-position: center 75%;">
-            <img src="https://i.imgur.com/JkLLZNT.jpg" alt="슬라이드 3" style="object-position: center;">
+            <img src="https://i.imgur.com/HZwbPPO.png" alt="슬라이드 1">
+            <img src="https://i.imgur.com/N2kEb5e.png" alt="슬라이드 2">
+            <img src="https://i.imgur.com/JkLLZNT.jpg" alt="슬라이드 3">
         </div>
         <button class="prev">❮</button>
         <button class="next">❯</button>
