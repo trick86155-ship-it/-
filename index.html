@@ -8,31 +8,38 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; background-color: #fffdf9; }
-        header { background-color: #f6f2ec; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
-        header .logo { margin: 0; font-size: 2em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; }
-        .center-menu { display: flex; gap: 30px; font-weight: 600; }
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; background-color: #fffdf9; user-select: none; }
+        header { background-color: #f6f2ec; padding: 20px 40px; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        header .logo { margin-right: auto; font-size: 2em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; }
+        .center-menu { display: flex; justify-content: center; gap: 40px; font-weight: 600; position: absolute; left: 50%; transform: translateX(-50%); }
         .center-menu a { text-decoration: none; color: #333; transition: color 0.3s; }
         .center-menu a:hover { color: #e07a5f; }
+        nav { margin-left: auto; }
         nav a { margin-left: 20px; text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: #e07a5f; }
 
-        .hero { text-align: center; overflow: hidden; margin-top: 80px; height: 700px; color: white; position: relative; }
-        .slides { display: flex; width: 400%; transition: transform 1s ease; }
-        .slide { flex: 1 0 100%; height: 700px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-repeat: no-repeat; background-position: center center; background-size: cover; }
-        .slide1 { background-image: url('https://i.imgur.com/eUHaBJb.png'); }
-        .slide2 { background: linear-gradient(to right, #84fab0, #8fd3f4); }
-        .slide3 { background: linear-gradient(to right, #a1c4fd, #c2e9fb); }
-        .clone { background-image: url('https://i.imgur.com/eUHaBJb.png'); }
+        .hero { position: relative; width: 100%; height: 700px; overflow: hidden; margin-top: 80px; }
+        .slides { display: flex; transition: transform 0.8s ease-in-out; width: 100%; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; flex: 0 0 100%; }
 
-        .button { background-color: #e07a5f; color: white; padding: 12px 24px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; text-decoration: none; transition: background 0.3s; }
-        .button:hover { background-color: #cf5d43; }
+        /* 개별 이미지 세로 위치 (원하는 값으로 조정하세요) */
+        /* 아래 nth-child 규칙은 제거하고, 필요 시 <img style="object-position:center 25%">처럼 인라인으로 조정하세요. */
+        .hero .slides img:nth-child(3) { object-position: center; }
+
+        .hero button { position: absolute; top: 50%; transform: translateY(-50%); background: none; color: white; border: none; font-size: 3em; padding: 0 15px; cursor: pointer; z-index: 10; }
+        .hero button:hover { color: #e07a5f; }
+        .hero .prev { left: 20px; }
+        .hero .next { right: 20px; }
+
+        .dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; }
+        .dot { width: 12px; height: 12px; background-color: rgba(255, 255, 255, 0.6); border-radius: 50%; cursor: pointer; transition: background-color 0.3s; }
+        .dot.active { background-color: #e07a5f; }
 
         .container { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
         .products { display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
         .product-card { width: 8cm; height: 10cm; border: 1px solid #eee; border-radius: 10px; overflow: hidden; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); background: white; transition: transform 0.2s; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; }
         .product-card:hover { transform: translateY(-5px); }
-        .product-card img { width: 8cm; height: 10cm; object-fit: cover; border-bottom: 1px solid #ddd; }
+        .product-card img { width: 8cm; height: 10cm; object-fit: cover; border-bottom: 1px solid #ddd; pointer-events: none; }
         .product-card h3 { margin: 0; padding: 10px 0; font-size: 1.2em; color: #333; background: white; width: 100%; text-align: center; position: relative; top: -40px; box-shadow: 0 -3px 5px rgba(0,0,0,0.1); }
 
         footer { background: #333; color: white; padding: 40px 60px; margin-top: 40px; }
@@ -45,7 +52,6 @@
 
         @media (max-width: 768px) {
             .hero { height: 400px; }
-            .slide { height: 400px; }
             .product-card { width: 100%; height: auto; }
             .product-card img { width: 100%; height: auto; }
             .product-card h3 { top: 0; box-shadow: none; }
@@ -53,6 +59,35 @@
             .footer-left, .footer-right { width: 100%; margin-bottom: 20px; text-align: center; }
         }
     </style>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault()); // 우클릭 방지
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelector('.slides');
+            const dots = document.querySelectorAll('.dot');
+            let current = 0;
+
+            function showSlide(index) {
+                slides.style.transform = `translateX(-${index * 100}%)`; // vw → % 로 변경
+                dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+                current = index;
+            }
+
+            document.querySelector('.next').addEventListener('click', () => {
+                showSlide((current + 1) % dots.length);
+            });
+
+            document.querySelector('.prev').addEventListener('click', () => {
+                showSlide((current - 1 + dots.length) % dots.length);
+            });
+
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => showSlide(i));
+            });
+
+            showSlide(0);
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -68,29 +103,18 @@
     </header>
 
     <div class="hero">
-        <div class="slider" aria-label="메인 슬라이드">
-            <div class="slides">
-                <div class="slide slide1">
-                    <h2>엄마 손맛, 정성스러운 칼국수</h2>
-                    <p>신선한 재료로 매일 직접 반죽한 따뜻한 한 그릇</p>
-                    <a href="#products" class="button">대표 메뉴 보기</a>
-                </div>
-                <div class="slide slide2">
-                    <h2>엄마 손맛, 정성스러운 칼국수</h2>
-                    <p>신선한 재료로 매일 직접 반죽한 따뜻한 한 그릇</p>
-                    <a href="#products" class="button">대표 메뉴 보기</a>
-                </div>
-                <div class="slide slide3">
-                    <h2>엄마 손맛, 정성스러운 칼국수</h2>
-                    <p>신선한 재료로 매일 직접 반죽한 따뜻한 한 그릇</p>
-                    <a href="#products" class="button">대표 메뉴 보기</a>
-                </div>
-                <div class="slide slide1 clone">
-                    <h2>엄마 손맛, 정성스러운 칼국수</h2>
-                    <p>신선한 재료로 매일 직접 반죽한 따뜻한 한 그릇</p>
-                    <a href="#products" class="button">대표 메뉴 보기</a>
-                </div>
-            </div>
+        <div class="slides">
+            <!-- 인라인 스타일로 개별 위치를 쉽게 조정할 수 있습니다. 값만 바꾸세요. -->
+            <img src="https://i.imgur.com/HZwbPPO.png" alt="슬라이드 1" style="object-position: center 25%;">
+            <img src="https://i.imgur.com/N2kEb5e.png" alt="슬라이드 2" style="object-position: center 75%;">
+            <img src="https://i.imgur.com/JkLLZNT.jpg" alt="슬라이드 3" style="object-position: center;">
+        </div>
+        <button class="prev">❮</button>
+        <button class="next">❯</button>
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
     </div>
 
@@ -98,15 +122,15 @@
         <h2 style="text-align:center; margin-bottom:40px;">대표 메뉴</h2>
         <div class="products">
             <div class="product-card" id="kal">
-                <img src="https://i.imgur.com/hooqu1O.jpg" alt="바지락 칼국수">
+                <img src="https://i.imgur.com/9XpMdsW.jpg" alt="바지락 칼국수">
                 <h3>바지락 칼국수</h3>
             </div>
             <div class="product-card" id="kong">
-                <img src="https://i.imgur.com/EcTAO8u.jpg" alt="서리태 콩국수">
+                <img src="https://i.imgur.com/kt2MVnB.jpg" alt="서리태 콩국수">
                 <h3>서리태 콩국수</h3>
             </div>
             <div class="product-card" id="soba">
-                <img src="https://i.imgur.com/8yzDXcp.jpg" alt="쇼쿠닌 소바">
+                <img src="https://i.imgur.com/gZLFzkN.jpg" alt="쇼쿠닌 소바">
                 <h3>쇼쿠닌 소바</h3>
             </div>
         </div>
@@ -123,27 +147,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-    (function(){
-      const container = document.querySelector('.hero .slides');
-      const slides = document.querySelectorAll('.hero .slide');
-      let index = 0;
-      const total = slides.length;
-      function go(){
-        index++;
-        container.style.transition = 'transform 1s ease';
-        container.style.transform = 'translateX(' + (-100 * index) + '%)';
-        if(index === total - 1){
-          setTimeout(()=>{
-            container.style.transition = 'none';
-            container.style.transform = 'translateX(0)';
-            index = 0;
-          },1000);
-        }
-      }
-      setInterval(go, 10000);
-    })();
-    </script>
 </body>
 </html>
