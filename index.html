@@ -20,7 +20,7 @@
 
         .hero { position: relative; width: 100%; height: 700px; overflow: hidden; margin-top: 80px; }
         .slides { display: flex; transition: transform 0.8s ease-in-out; width: 100%; }
-        .hero img { width: 100vw; height: 100%; object-fit: cover; flex: 0 0 100%; }
+        .hero img { width: 100vw; height: 100%; object-fit: cover; object-position: center var(--posY, 50%); flex: 0 0 100%; }
         .hero img:nth-child(1) { object-position: center 70%; } /* 1번 이미지 아래쪽 중심 */
         .hero img:nth-child(2), .hero img:nth-child(3) { object-position: center; }
 
@@ -102,9 +102,9 @@
 
     <div class="hero">
         <div class="slides">
-            <img src="https://i.imgur.com/HZwbPPO.png" alt="슬라이드 1">
-            <img src="https://i.imgur.com/N2kEb5e.png" alt="슬라이드 2">
-            <img src="https://i.imgur.com/JkLLZNT.jpg" alt="슬라이드 3">
+            <img src="https://i.imgur.com/HZwbPPO.png" alt="슬라이드 1" style="--posY: 50%;">
+            <img src="https://i.imgur.com/N2kEb5e.png" alt="슬라이드 2" style="--posY: 50%;">
+            <img src="https://i.imgur.com/JkLLZNT.jpg" alt="슬라이드 3" style="--posY: 50%;">
         </div>
         <button class="prev">❮</button>
         <button class="next">❯</button>
