@@ -47,14 +47,14 @@
         footer a:hover { text-decoration: underline; }
 
         @media (max-width: 768px) {
-            .hero { width: 100%; height: auto; }
-            .hero img { width: 100%; height: auto; }
-            .product-card { width: 100%; height: auto; }
-            .product-card img { width: 100%; height: auto; }
-            .product-card h3 { top: 0; box-shadow: none; }
-            .footer-content { flex-direction: column; text-align: center; }
-            .footer-left, .footer-right { width: 100%; margin-bottom: 20px; text-align: center; }
+            header {
+                justify-content: center;
+            }
+            .center-menu, nav {
+                display: none;
+            }
         }
+
     </style>
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault()); // 우클릭 방지
