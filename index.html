@@ -11,26 +11,29 @@
         body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; background-color: #fffdf9; }
         header { background-color: #f6f2ec; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
         header .logo { margin: 0; font-size: 2em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; }
+        .center-menu { display: flex; gap: 30px; font-weight: 600; }
+        .center-menu a { text-decoration: none; color: #333; transition: color 0.3s; }
+        .center-menu a:hover { color: #e07a5f; }
         nav a { margin-left: 20px; text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: #e07a5f; }
 
-        .hero { text-align: center; overflow: hidden; margin-top: 80px; height: 500px; color: white; position: relative; }
+        .hero { text-align: center; overflow: hidden; margin-top: 80px; height: 700px; color: white; position: relative; }
         .slides { display: flex; width: 400%; transition: transform 1s ease; }
-        .slide { flex: 1 0 100%; height: 500px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; }
-        .slide1 { background: linear-gradient(to right, #f6d365, #fda085); }
+        .slide { flex: 1 0 100%; height: 700px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-repeat: no-repeat; background-position: center center; background-size: cover; }
+        .slide1 { background-image: url('https://i.imgur.com/eUHaBJb.png'); }
         .slide2 { background: linear-gradient(to right, #84fab0, #8fd3f4); }
         .slide3 { background: linear-gradient(to right, #a1c4fd, #c2e9fb); }
-        .clone { background: linear-gradient(to right, #f6d365, #fda085); }
+        .clone { background-image: url('https://i.imgur.com/eUHaBJb.png'); }
 
         .button { background-color: #e07a5f; color: white; padding: 12px 24px; border: none; border-radius: 8px; font-size: 1em; cursor: pointer; text-decoration: none; transition: background 0.3s; }
         .button:hover { background-color: #cf5d43; }
 
         .container { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
-        .products { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .products { display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
         .product-card { width: 8cm; height: 10cm; border: 1px solid #eee; border-radius: 10px; overflow: hidden; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); background: white; transition: transform 0.2s; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; }
         .product-card:hover { transform: translateY(-5px); }
         .product-card img { width: 8cm; height: 10cm; object-fit: cover; border-bottom: 1px solid #ddd; }
-        .product-card h3 { margin: 10px 0; font-size: 1.2em; color: #333; }
+        .product-card h3 { margin: 0; padding: 10px 0; font-size: 1.2em; color: #333; background: white; width: 100%; text-align: center; position: relative; top: -40px; box-shadow: 0 -3px 5px rgba(0,0,0,0.1); }
 
         footer { background: #333; color: white; padding: 40px 60px; margin-top: 40px; }
         .footer-content { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
@@ -41,10 +44,11 @@
         footer a:hover { text-decoration: underline; }
 
         @media (max-width: 768px) {
-            .hero { height: 300px; }
-            .slide { height: 300px; }
+            .hero { height: 400px; }
+            .slide { height: 400px; }
             .product-card { width: 100%; height: auto; }
             .product-card img { width: 100%; height: auto; }
+            .product-card h3 { top: 0; box-shadow: none; }
             .footer-content { flex-direction: column; text-align: center; }
             .footer-left, .footer-right { width: 100%; margin-bottom: 20px; text-align: center; }
         }
@@ -53,8 +57,12 @@
 <body>
     <header>
         <h1 class="logo">MOMFOOD</h1>
+        <div class="center-menu">
+            <a href="#kal">칼국수</a>
+            <a href="#kong">콩국수</a>
+            <a href="#soba">소바</a>
+        </div>
         <nav>
-            <a href="#about">소개</a>
             <a href="#products">상품</a>
         </nav>
     </header>
@@ -86,23 +94,18 @@
         </div>
     </div>
 
-    <section id="about" class="container">
-        <h2>브랜드 소개</h2>
-        <p>MomFood 칼국수는 고급 면을 매일 직접 반죽한 생면과 바지락의 깊은 육수로 만든 정통 가정식 칼국수 밀키트입니다. HACCP 시설에서 안전하게 생산되며, 화학첨가물을 최소화한 건강하고 따뜻한 식사를 제공합니다.</p>
-    </section>
-
     <section id="products" class="container">
-        <h2>대표 메뉴</h2>
+        <h2 style="text-align:center; margin-bottom:40px;">대표 메뉴</h2>
         <div class="products">
-            <div class="product-card">
+            <div class="product-card" id="kal">
                 <img src="https://i.imgur.com/hooqu1O.jpg" alt="바지락 칼국수">
                 <h3>바지락 칼국수</h3>
             </div>
-            <div class="product-card">
+            <div class="product-card" id="kong">
                 <img src="https://i.imgur.com/EcTAO8u.jpg" alt="서리태 콩국수">
                 <h3>서리태 콩국수</h3>
             </div>
-            <div class="product-card">
+            <div class="product-card" id="soba">
                 <img src="https://i.imgur.com/8yzDXcp.jpg" alt="쇼쿠닌 소바">
                 <h3>쇼쿠닌 소바</h3>
             </div>
