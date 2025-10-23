@@ -14,9 +14,11 @@
         .center-menu { display: flex; justify-content: center; gap: 28px; font-weight: 600; position: absolute; left: 50%; transform: translateX(-50%); }
         .center-menu a { text-decoration: none; color: #333; transition: color 0.3s; font-size: 0.9em; }
         .center-menu a:hover { color: #e07a5f; }
-        nav { margin-left: auto; }
-        nav a { margin-left: 14px; text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; font-size: 0.9em; }
+        nav { margin-left: auto; display: flex; align-items: center; gap: 15px; }
+        nav a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; font-size: 0.9em; }
         nav a:hover { color: #e07a5f; }
+        .search-btn { background: none; border: none; font-size: 1.2em; cursor: pointer; color: #333; transition: color 0.3s; }
+        .search-btn:hover { color: #e07a5f; }
 
         .hero { position: relative; width: 1920px; height: 830px; overflow: hidden; margin: 0 auto; margin-top: 56px; }
         .slides { display: flex; transition: transform 0.8s ease-in-out; width: 100%; }
@@ -67,7 +69,6 @@
                 object-fit: contain;
             }
         }
-
     </style>
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault()); // 우클릭 방지
@@ -109,6 +110,7 @@
         </div>
         <nav>
             <a href="#products">상품</a>
+            <button class="search-btn">🔍</button>
         </nav>
     </header>
 
