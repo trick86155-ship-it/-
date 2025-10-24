@@ -204,6 +204,12 @@
             e.preventDefault();
             e.stopPropagation();
             const parentLi = toggle.parentElement;
+
+            // 모든 다른 서브메뉴 닫기
+            categoryMenu.querySelectorAll('.dropdown li').forEach(li => {
+              if (li !== parentLi) li.classList.remove('active');
+            });
+
             parentLi.classList.toggle('active');
           });
         });
@@ -249,6 +255,4 @@
 
         go(0);
       });
-    </script>
-</body>
-</html>
+    </
