@@ -10,23 +10,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; background-color: #fffdf9; user-select: none; }
-        header { background-color: #f6f2ec; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; width: 100%; padding: 20px 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); z-index: 1000; box-sizing: border-box; }
+        header { background-color: #f6f2ec; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; width: 100%; padding: 15px 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); z-index: 1000; box-sizing: border-box; }
 
         .header-inner { display: flex; flex-direction: column; align-items: flex-start; width: 100%; max-width: 1200px; margin-left: 40px; }
 
-        .header-top { display: flex; align-items: center; justify-content: flex-start; width: 100%; position: relative; }
-        .logo { font-size: 1.6em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; margin-right: 40px; }
+        .header-top { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+        .logo { font-size: 1.6em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; }
 
-        .search-container { display: flex; align-items: center; position: absolute; left: 50%; transform: translateX(-50%); width: 28%; min-width: 300px; max-width: 500px; }
-        .search-bar { flex: 1; position: relative; }
-        .search-input { width: 100%; padding: 10px 45px 10px 20px; border-radius: 30px; border: 1px solid #ccc; font-size: 1em; outline: none; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
-        .search-button { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.2em; cursor: pointer; color: #555; }
-        .search-button:hover { color: #e07a5f; }
+        .header-search { display: flex; justify-content: center; align-items: center; flex: 1; }
+        .header-search input { width: 40%; min-width: 300px; max-width: 600px; padding: 10px 20px; border-radius: 30px; border: 1px solid #ccc; font-size: 1em; outline: none; transition: all 0.3s ease; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
+        .header-search input:focus { border-color: #e07a5f; box-shadow: 0 0 5px rgba(224,122,95,0.4); }
+        .header-search button { margin-left: 10px; background-color: #e07a5f; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.1em; cursor: pointer; transition: background 0.3s ease; }
+        .header-search button:hover { background-color: #cf624c; }
 
-        .menu-row { display: flex; justify-content: flex-start; align-items: center; gap: 30px; width: 100%; margin-top: 10px; }
-        .menu-item { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #333; cursor: pointer; }
-        .menu-item i { font-size: 1.2em; color: #e07a5f; }
-        .menu-item span { font-size: 1em; }
+        .menu-row { display: flex; justify-content: flex-start; align-items: center; gap: 30px; width: 100%; margin-top: 8px; }
+        .menu-item { display: flex; align-items: center; gap: 8px; font-weight: 600; color: #333; cursor: pointer; }
+        .menu-item i { font-size: 1.1em; color: #e07a5f; position: relative; top: 1px; }
+        .menu-item span { font-size: 1em; position: relative; top: -1px; }
         .menu-links { display: flex; gap: 25px; }
         .menu-links a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
         .menu-links a:hover { color: #e07a5f; }
@@ -60,54 +60,26 @@
         footer a:hover { text-decoration: underline; }
 
         @media (max-width: 768px) {
-            .search-bar { width: 70%; }
+            .header-search input { width: 70%; }
             .menu-row { flex-direction: column; align-items: flex-start; }
         }
     </style>
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const slides = document.querySelector('.slides');
-            const dots = document.querySelectorAll('.dot');
-            let current = 0;
-
-            function showSlide(index) {
-                slides.style.transform = `translateX(-${index * 100}%)`;
-                dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-                current = index;
-            }
-
-            document.querySelector('.next').addEventListener('click', () => {
-                showSlide((current + 1) % dots.length);
-            });
-
-            document.querySelector('.prev').addEventListener('click', () => {
-                showSlide((current - 1 + dots.length) % dots.length);
-            });
-
-            dots.forEach((dot, i) => {
-                dot.addEventListener('click', () => showSlide(i));
-            });
-
-            showSlide(0);
-        });
-    </script>
 </head>
 <body>
     <header>
         <div class="header-inner">
             <div class="header-top">
                 <h1 class="logo">MOMFOOD</h1>
-                <div class="search-container">
-                    <div class="search-bar">
-                        <input type="text" class="search-input" placeholder="검색어를 입력하세요...">
-                        <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
+                <div class="header-search">
+                    <input type="text" placeholder="원하시는 메뉴를 검색하세요...">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
             <div class="menu-row">
-                <div class="menu-item"><i class="fa-solid fa-bars"></i><span>전체 카테고리</span></div>
+                <div class="menu-item unified-item">
+                    <i class="fa-solid fa-bars"></i>
+                    <span>전체 카테고리</span>
+                </div>
                 <div class="menu-links">
                     <a href="#">신제품</a>
                     <a href="#">이벤트</a>
