@@ -12,12 +12,12 @@
         body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; background-color: #fffdf9; user-select: none; }
         header { background-color: #f6f2ec; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; width: 100%; padding: 15px 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); z-index: 1000; box-sizing: border-box; }
 
-        .header-inner { display: flex; flex-direction: column; align-items: flex-start; width: 100%; max-width: 1200px; margin-left: 40px; }
+        .header-inner { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; }
 
-        .header-top { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-        .logo { font-size: 1.6em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; }
+        .header-top { display: flex; align-items: center; justify-content: center; width: 100%; position: relative; }
+        .logo { position: absolute; left: 0; font-size: 1.6em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; }
 
-        .header-search { display: flex; justify-content: center; align-items: center; flex: 1; }
+        .header-search { display: flex; justify-content: center; align-items: center; }
         .header-search input { width: 40%; min-width: 300px; max-width: 600px; padding: 10px 20px; border-radius: 30px; border: 1px solid #ccc; font-size: 1em; outline: none; transition: all 0.3s ease; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
         .header-search input:focus { border-color: #e07a5f; box-shadow: 0 0 5px rgba(224,122,95,0.4); }
         .header-search button { margin-left: 10px; background-color: #e07a5f; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.1em; cursor: pointer; transition: background 0.3s ease; }
@@ -133,5 +133,45 @@
             </div>
         </div>
     </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const track = document.querySelector('.slides');
+        const slides = Array.from(track.querySelectorAll('img'));
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const dots = Array.from(document.querySelectorAll('.dot'));
+        let index = 0;
+
+        function go(i) {
+          index = (i + slides.length) % slides.length;
+          track.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((d, k) => d.classList.toggle('active', k === index));
+        }
+
+        nextBtn.addEventListener('click', () => go(index + 1));
+        prevBtn.addEventListener('click', () => go(index - 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+
+        // touch swipe (mobile)
+        let startX = null;
+        track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', (e) => {
+          if (startX === null) return;
+          const dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 50) go(index + (dx < 0 ? 1 : -1));
+          startX = null;
+        });
+
+        // keyboard support
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') go(index + 1);
+          if (e.key === 'ArrowLeft') go(index - 1);
+        });
+
+        go(0);
+      });
+    </script>
 </body>
 </html>
+
