@@ -23,10 +23,22 @@
         .header-search button { margin-left: 10px; background-color: #e07a5f; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.1em; cursor: pointer; transition: background 0.3s ease; }
         .header-search button:hover { background-color: #cf624c; }
 
-        .menu-row { display: flex; justify-content: flex-start; align-items: center; gap: 30px; width: 100%; margin-top: 8px; margin-left: 0; }
-        .menu-item { display: flex; align-items: center; gap: 8px; font-weight: 600; color: #333; cursor: pointer; }
+        .menu-row { display: flex; justify-content: flex-start; align-items: center; gap: 30px; width: 100%; margin-top: 8px; margin-left: 0; position: relative; }
+        .menu-item { position: relative; display: flex; align-items: center; gap: 8px; font-weight: 600; color: #333; cursor: pointer; }
         .menu-item i { font-size: 1.1em; color: #e07a5f; position: relative; top: 1px; }
         .menu-item span { font-size: 1em; position: relative; top: -1px; }
+
+        /* 클릭 기반 드롭다운 */
+        .dropdown { display: none; position: absolute; top: 30px; left: 0; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 10px 0; min-width: 180px; z-index: 1000; }
+        .dropdown.active { display: block; }
+        .dropdown a { display: block; padding: 8px 20px; text-decoration: none; color: #333; font-size: 0.95em; transition: background 0.2s; }
+        .dropdown a:hover { background: #f6f2ec; color: #e07a5f; }
+
+        /* 2차 드롭다운 */
+        .sub-dropdown { display: none; position: absolute; top: 0; left: 180px; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 10px 0; min-width: 180px; }
+        .dropdown li { position: relative; list-style: none; }
+        .dropdown li.active > .sub-dropdown { display: block; }
+
         .menu-links { display: flex; gap: 25px; }
         .menu-links a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
         .menu-links a:hover { color: #e07a5f; }
@@ -76,9 +88,33 @@
                 </div>
             </div>
             <div class="menu-row">
-                <div class="menu-item unified-item">
+                <div class="menu-item unified-item" id="categoryMenu">
                     <i class="fa-solid fa-bars"></i>
                     <span>전체 카테고리</span>
+                    <ul class="dropdown">
+                        <li>
+                            <a href="#" class="submenu-toggle">칼국수</a>
+                            <ul class="sub-dropdown">
+                                <li><a href="#">칼국수</a></li>
+                                <li><a href="#">비빔 칼국수</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">콩국수</a></li>
+                        <li>
+                            <a href="#" class="submenu-toggle">우동</a>
+                            <ul class="sub-dropdown">
+                                <li><a href="#">우동</a></li>
+                                <li><a href="#">비빔 우동</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="submenu-toggle">소바</a>
+                            <ul class="sub-dropdown">
+                                <li><a href="#">메밀 간장 소바</a></li>
+                                <li><a href="#">비빔 소바</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
                 <div class="menu-links">
                     <a href="#">신제품</a>
@@ -154,6 +190,32 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        const categoryMenu = document.getElementById('categoryMenu');
+        const dropdown = categoryMenu.querySelector('.dropdown');
+        const submenuToggles = categoryMenu.querySelectorAll('.submenu-toggle');
+
+        categoryMenu.addEventListener('click', (e) => {
+          e.stopPropagation();
+          dropdown.classList.toggle('active');
+        });
+
+        submenuToggles.forEach(toggle => {
+          toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const parentLi = toggle.parentElement;
+            parentLi.classList.toggle('active');
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!categoryMenu.contains(e.target)) {
+            dropdown.classList.remove('active');
+            categoryMenu.querySelectorAll('.dropdown li').forEach(li => li.classList.remove('active'));
+          }
+        });
+
+        // Hero 슬라이드 유지
         const track = document.querySelector('.slides');
         const slides = Array.from(track.querySelectorAll('img'));
         const prevBtn = document.querySelector('.prev');
