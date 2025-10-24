@@ -7,18 +7,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; background-color: #fffdf9; user-select: none; }
-        header { background-color: #f6f2ec; padding: 14px 28px; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: all 0.3s ease; }
-        header .logo { margin-right: auto; font-size: 1.4em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; transition: all 0.3s ease; }
-        .center-menu { display: flex; justify-content: center; gap: 28px; font-weight: 600; position: absolute; left: 50%; transform: translateX(-50%); }
-        .center-menu a { text-decoration: none; color: #333; transition: color 0.3s; font-size: 0.9em; }
+        header { background-color: #f6f2ec; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: all 0.3s ease; }
+        header .logo { font-size: 1.4em; color: #e07a5f; font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 1px; transition: all 0.3s ease; }
+        .center-menu { display: flex; justify-content: center; gap: 40px; font-weight: 600; flex: 1; text-align: center; }
+        .center-menu a { text-decoration: none; color: #333; transition: color 0.3s; font-size: 1em; display: inline-block; }
         .center-menu a:hover { color: #e07a5f; }
-        nav { margin-left: auto; display: flex; align-items: center; gap: 15px; }
-        nav a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; font-size: 0.9em; }
-        nav a:hover { color: #e07a5f; }
-        .search-btn { background: none; border: none; font-size: 1.2em; cursor: pointer; color: #333; transition: color 0.3s; }
-        .search-btn:hover { color: #e07a5f; }
+        nav { display: flex; align-items: center; justify-content: flex-end; }
+        .search-btn { background: none; border: none; font-size: 1.4em; cursor: pointer; color: #333; transition: color 0.3s, transform 0.2s ease; margin-left: 10px; }
+        .search-btn:hover { color: #e07a5f; transform: scale(1.1); }
 
         .hero { position: relative; width: 1920px; height: 830px; overflow: hidden; margin: 0 auto; margin-top: 56px; }
         .slides { display: flex; transition: transform 0.8s ease-in-out; width: 100%; }
@@ -34,7 +33,7 @@
         .dot.active { background-color: #e07a5f; }
 
         .container { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
-        .products { display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+        .products { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; text-align: center; }
         .product-card { width: 8cm; height: 10cm; border: 1px solid #eee; border-radius: 10px; overflow: hidden; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); background: white; transition: transform 0.2s; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; }
         .product-card:hover { transform: translateY(-5px); }
         .product-card img { width: 8cm; height: 10cm; object-fit: cover; border-bottom: 1px solid #ddd; pointer-events: none; }
@@ -51,10 +50,10 @@
         @media (max-width: 768px) {
             header {
                 justify-content: center;
-                padding: 7px 14px; /* 50% 줄임 */
+                padding: 7px 14px;
             }
             header .logo {
-                font-size: 0.7em; /* 글씨 크기도 50% 줄임 */
+                font-size: 0.7em;
             }
             .center-menu, nav {
                 display: none;
@@ -71,7 +70,7 @@
         }
     </style>
     <script>
-        document.addEventListener('contextmenu', event => event.preventDefault()); // 우클릭 방지
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelector('.slides');
@@ -109,8 +108,7 @@
             <a href="#soba">소바</a>
         </div>
         <nav>
-            <a href="#products">상품</a>
-            <button class="search-btn">🔍</button>
+            <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
         </nav>
     </header>
 
