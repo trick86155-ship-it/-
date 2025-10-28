@@ -136,10 +136,10 @@
     <section id="products" class="container">
         <h2 style="text-align:center; margin-bottom:40px;">대표 메뉴</h2>
         <div class="products">
-            <div class="product-card" id="kal">
+            <a href="bajirak.html" class="product-card" id="kal">
                 <img src="https://i.imgur.com/9XpMdsW.jpg" alt="바지락 칼국수">
                 <h3>바지락 칼국수</h3>
-            </div>
+            </a>
             <div class="product-card" id="kong">
                 <img src="https://i.imgur.com/kt2MVnB.jpg" alt="서리태 콩국수">
                 <h3>서리태 콩국수</h3>
@@ -187,13 +187,11 @@
         const dropdown = categoryMenu.querySelector('.dropdown');
         const submenuToggles = categoryMenu.querySelectorAll('.submenu-toggle');
 
-        // 전체 카테고리 클릭 시 1차 메뉴 토글
         categoryMenu.addEventListener('click', (e) => {
           e.stopPropagation();
           dropdown.classList.toggle('active');
         });
 
-        // 1차 메뉴 클릭 시 해당 2차 메뉴만 열고 다른 건 닫기
         submenuToggles.forEach(toggle => {
           toggle.addEventListener('click', (e) => {
             e.preventDefault();
@@ -208,7 +206,6 @@
           });
         });
 
-        // 외부 클릭 시 전체 닫기
         document.addEventListener('click', (e) => {
           if (!categoryMenu.contains(e.target)) {
             dropdown.classList.remove('active');
@@ -216,7 +213,6 @@
           }
         });
 
-        // Hero 슬라이드
         const track = document.querySelector('.slides');
         const slides = Array.from(track.querySelectorAll('img'));
         const prevBtn = document.querySelector('.prev');
