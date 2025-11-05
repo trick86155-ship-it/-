@@ -43,7 +43,7 @@
 
     main { margin-top: 150px; padding: 60px 40px; max-width: 1200px; margin-left: auto; margin-right: auto; }
 
-    .product-detail { display: flex; align-items: flex-start; gap: 40px; }
+    .product-detail { display: flex; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
     .product-image { flex: 6; }
     .product-image img { width: 100%; border-radius: 10px; object-fit: cover; }
 
@@ -61,6 +61,12 @@
     .footer-right { text-align: right; }
     footer a { color: #e07a5f; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .product-detail { flex-direction: column; }
+      .product-image, .product-info { flex: 100%; }
+      .product-info { margin-top: 20px; }
+    }
   </style>
 </head>
 <body>
@@ -166,4 +172,3 @@
   </script>
 </body>
 </html>
-
