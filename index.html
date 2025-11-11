@@ -41,9 +41,9 @@
         .menu-links a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
         .menu-links a:hover { color: #e07a5f; }
 
-        .hero { position: relative; width: 100%; max-width: 1920px; height: 830px; overflow: hidden; margin: 0 auto; margin-top: 150px; box-sizing: border-box; }
-        .slides { display: flex; transition: transform 0.8s ease-in-out; width: 100%; }
-        .hero img { width: 100%; height: 100%; object-fit: contain; object-position: center; flex: 0 0 auto; }
+        .hero { position: relative; width: 100%; max-width: 1920px; height: 700px; overflow: hidden; margin: 0 auto; margin-top: 150px; box-sizing: border-box; }
+        .slides { display: flex; transition: transform 0.8s ease-in-out; width: 100%; height: 100%; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center; flex: 0 0 100%; }
 
         .hero button { position: absolute; top: 50%; transform: translateY(-50%); background: none; color: white; border: none; font-size: 3em; padding: 0 15px; cursor: pointer; z-index: 10; }
         .hero button:hover { color: #e07a5f; }
@@ -185,7 +185,27 @@
             categoryMenu.querySelectorAll('.dropdown li').forEach(li => li.classList.remove('active'));
           }
         });
+
+        // --- 슬라이드 기능 복원 ---
+        const track = document.querySelector('.slides');
+        const slides = Array.from(track.querySelectorAll('img'));
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const dots = Array.from(document.querySelectorAll('.dot'));
+        let index = 0;
+
+        function go(i) {
+          index = (i + slides.length) % slides.length;
+          track.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((d, k) => d.classList.toggle('active', k === index));
+        }
+
+        nextBtn.addEventListener('click', () => go(index + 1));
+        prevBtn.addEventListener('click', () => go(index - 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+        go(0);
       });
     </script>
 </body>
 </html>
+
